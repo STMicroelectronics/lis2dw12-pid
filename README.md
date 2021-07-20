@@ -16,7 +16,7 @@ Some examples of driver usage can be found [here](https://github.com/STMicroelec
 
 # 2 - Integration details
 
-The driver is platform-independent, you only need to define two  functions for read and write transactions from the sensor hardware bus  (ie. SPI or I²C). **A few devices integrate an extra bit in the  communication protocol in order to enable multi read/write access, this  bit must be managed in the read and write functions defined by the user.** Please refer to the read and write implementation in the [reference examples](https://github.com/STMicroelectronics/STMems_Standard_C_drivers/tree/master/LIS2DW12_STdC/examples).
+The driver is platform-independent, you only need to define two  functions for read and write transactions from the sensor hardware bus  (ie. SPI or I²C). **A few devices integrate an extra bit in the  communication protocol in order to enable multi read/write access, this  bit must be managed in the read and write functions defined by the user.** Please refer to the read and write implementation in the [reference examples](https://github.com/STMicroelectronics/STMems_Standard_C_drivers/tree/master/lis2dw12_STdC/examples).
 
 
 
@@ -45,7 +45,7 @@ dev_ctx.read_reg = platform_read;
 dev_ctx.handle = &platform_handle;
 ```
 
-Some integration examples can be found [here](https://github.com/STMicroelectronics/STMems_Standard_C_drivers/tree/master/LIS2DW12_STdC/examples).
+Some integration examples can be found [here](https://github.com/STMicroelectronics/STMems_Standard_C_drivers/tree/master/lis2dw12_STdC/examples).
 
 ### 2.b Required properties
 
