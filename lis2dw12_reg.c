@@ -2934,7 +2934,7 @@ int32_t lis2dw12_6d_feed_data_get(stmdev_ctx_t *ctx,
   */
 
 /**
-  * @brief  Wake up duration event(1LSb = 1 / ODR).[set]
+  * @brief  Free fall duration event(1LSb = 1 / ODR).[set]
   *
   * @param  ctx      read / write interface definitions
   * @param  val      change the values of ff_dur in reg
@@ -2975,7 +2975,7 @@ int32_t lis2dw12_ff_dur_set(stmdev_ctx_t *ctx, uint8_t val)
 }
 
 /**
-  * @brief  Wake up duration event(1LSb = 1 / ODR).[get]
+  * @brief  Free fall duration event(1LSb = 1 / ODR).[get]
   *
   * @param  ctx      read / write interface definitions
   * @param  val      change the values of ff_dur in
