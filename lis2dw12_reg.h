@@ -227,8 +227,7 @@ typedef struct
 typedef struct
 {
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
-uint8_t slp_mode                   :
-  2;  /* slp_mode_sel + slp_mode_1 */
+  uint8_t slp_mode                   : 2;  /* slp_mode_sel + slp_mode_1 */
   uint8_t not_used_01                : 1;
   uint8_t h_lactive                  : 1;
   uint8_t lir                        : 1;
@@ -240,8 +239,7 @@ uint8_t slp_mode                   :
   uint8_t lir                        : 1;
   uint8_t h_lactive                  : 1;
   uint8_t not_used_01                : 1;
-uint8_t slp_mode                   :
-  2;  /* slp_mode_sel + slp_mode_1 */
+  uint8_t slp_mode                   : 2;  /* slp_mode_sel + slp_mode_1 */
 #endif /* DRV_BYTE_ORDER */
 
 } lis2dw12_ctrl3_t;
