@@ -197,7 +197,6 @@ typedef struct
   uint8_t mode                       : 2;
   uint8_t lp_mode                    : 2;
 #endif /* DRV_BYTE_ORDER */
-
 } lis2dw12_ctrl1_t;
 
 #define LIS2DW12_CTRL2                       0x21U
@@ -222,14 +221,14 @@ typedef struct
   uint8_t i2c_disable                : 1;
   uint8_t sim                        : 1;
 #endif /* DRV_BYTE_ORDER */
-
 } lis2dw12_ctrl2_t;
 
 #define LIS2DW12_CTRL3                       0x22U
 typedef struct
 {
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
-  uint8_t slp_mode                   : 2;  /* slp_mode_sel + slp_mode_1 */
+uint8_t slp_mode                   :
+  2;  /* slp_mode_sel + slp_mode_1 */
   uint8_t not_used_01                : 1;
   uint8_t h_lactive                  : 1;
   uint8_t lir                        : 1;
@@ -241,9 +240,9 @@ typedef struct
   uint8_t lir                        : 1;
   uint8_t h_lactive                  : 1;
   uint8_t not_used_01                : 1;
-  uint8_t slp_mode                   : 2;  /* slp_mode_sel + slp_mode_1 */
+uint8_t slp_mode                   :
+  2;  /* slp_mode_sel + slp_mode_1 */
 #endif /* DRV_BYTE_ORDER */
-
 } lis2dw12_ctrl3_t;
 
 #define LIS2DW12_CTRL4_INT1_PAD_CTRL         0x23U
