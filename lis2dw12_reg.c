@@ -101,42 +101,42 @@ int32_t __weak lis2dw12_write_reg(const stmdev_ctx_t *ctx, uint8_t reg,
 
 float_t lis2dw12_from_fs2_to_mg(int16_t lsb)
 {
-  return ((float_t)lsb) * 0.061f;
+  return ((float_t)lsb) * 0.244f;
 }
 
 float_t lis2dw12_from_fs4_to_mg(int16_t lsb)
 {
-  return ((float_t)lsb) * 0.122f;
+  return ((float_t)lsb) * 0.488f;
 }
 
 float_t lis2dw12_from_fs8_to_mg(int16_t lsb)
 {
-  return ((float_t)lsb) * 0.244f;
+  return ((float_t)lsb) * 0.976f;
 }
 
 float_t lis2dw12_from_fs16_to_mg(int16_t lsb)
 {
-  return ((float_t)lsb) * 0.488f;
+  return ((float_t)lsb) * 1.952f;
 }
 
 float_t lis2dw12_from_fs2_lp1_to_mg(int16_t lsb)
 {
-  return ((float_t)lsb) * 0.061f;
+  return ((float_t)lsb) * 0.976f;
 }
 
 float_t lis2dw12_from_fs4_lp1_to_mg(int16_t lsb)
 {
-  return ((float_t)lsb) * 0.122f;
+  return ((float_t)lsb) * 1.952f;
 }
 
 float_t lis2dw12_from_fs8_lp1_to_mg(int16_t lsb)
 {
-  return ((float_t)lsb) * 0.244f;
+  return ((float_t)lsb) * 3.904f;
 }
 
 float_t lis2dw12_from_fs16_lp1_to_mg(int16_t lsb)
 {
-  return ((float_t)lsb) * 0.488f;
+  return ((float_t)lsb) * 7.808f;
 }
 
 float_t lis2dw12_from_lsb_to_celsius(int16_t lsb)
