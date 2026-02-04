@@ -714,15 +714,15 @@ int32_t lis2dw12_usr_offset_z_get(const stmdev_ctx_t *ctx, uint8_t *buff)
 int32_t lis2dw12_offset_weight_set(const stmdev_ctx_t *ctx,
                                    lis2dw12_usr_off_w_t val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
 
   if (ret == 0)
   {
     reg.usr_off_w = (uint8_t) val;
-    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
   return ret;
@@ -740,26 +740,27 @@ int32_t lis2dw12_offset_weight_set(const stmdev_ctx_t *ctx,
 int32_t lis2dw12_offset_weight_get(const stmdev_ctx_t *ctx,
                                    lis2dw12_usr_off_w_t *val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
 
-  if (ret != 0) { return ret; }
-
-  switch (reg.usr_off_w)
+  if (ret == 0)
   {
-    case LIS2DW12_LSb_977ug:
-      *val = LIS2DW12_LSb_977ug;
-      break;
+    switch (reg.usr_off_w)
+    {
+      case LIS2DW12_LSb_977ug:
+        *val = LIS2DW12_LSb_977ug;
+        break;
 
-    case LIS2DW12_LSb_15mg6:
-      *val = LIS2DW12_LSb_15mg6;
-      break;
+      case LIS2DW12_LSb_15mg6:
+        *val = LIS2DW12_LSb_15mg6;
+        break;
 
-    default:
-      *val = LIS2DW12_LSb_977ug;
-      break;
+      default:
+        *val = LIS2DW12_LSb_977ug;
+        break;
+    }
   }
 
   return ret;
@@ -944,8 +945,10 @@ int32_t lis2dw12_reset_get(const stmdev_ctx_t *ctx, uint8_t *val)
   int32_t ret;
 
   ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL2, (uint8_t *) &reg, 1);
-
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   *val = reg.soft_reset;
 
@@ -990,8 +993,10 @@ int32_t lis2dw12_boot_get(const stmdev_ctx_t *ctx, uint8_t *val)
   int32_t ret;
 
   ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL2, (uint8_t *) &reg, 1);
-
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   *val = reg.boot;
 
@@ -1072,15 +1077,15 @@ int32_t lis2dw12_self_test_get(const stmdev_ctx_t *ctx, lis2dw12_st_t *val)
 int32_t lis2dw12_data_ready_mode_set(const stmdev_ctx_t *ctx,
                                      lis2dw12_drdy_pulsed_t val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
 
   if (ret == 0)
   {
     reg.drdy_pulsed = (uint8_t) val;
-    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
   return ret;
@@ -1097,12 +1102,14 @@ int32_t lis2dw12_data_ready_mode_set(const stmdev_ctx_t *ctx,
 int32_t lis2dw12_data_ready_mode_get(const stmdev_ctx_t *ctx,
                                      lis2dw12_drdy_pulsed_t *val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
-
-  if (ret != 0) { return ret; }
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   switch (reg.drdy_pulsed)
   {
@@ -1147,7 +1154,7 @@ int32_t lis2dw12_filter_path_set(const stmdev_ctx_t *ctx,
                                  lis2dw12_fds_t val)
 {
   lis2dw12_ctrl6_t ctrl6;
-  lis2dw12_ctrl_reg7_t ctrl_reg7;
+  lis2dw12_ctrl7_t ctrl_reg7;
   int32_t ret;
 
   ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL6, (uint8_t *) &ctrl6, 1);
@@ -1160,15 +1167,13 @@ int32_t lis2dw12_filter_path_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7,
-                            (uint8_t *) &ctrl_reg7, 1);
+    ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &ctrl_reg7, 1);
   }
 
   if (ret == 0)
   {
     ctrl_reg7.usr_off_on_out = (uint8_t) val & 0x01U;
-    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL_REG7,
-                             (uint8_t *) &ctrl_reg7, 1);
+    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &ctrl_reg7, 1);
   }
 
   return ret;
@@ -1186,12 +1191,14 @@ int32_t lis2dw12_filter_path_get(const stmdev_ctx_t *ctx,
                                  lis2dw12_fds_t *val)
 {
   lis2dw12_ctrl6_t ctrl6;
-  lis2dw12_ctrl_reg7_t ctrl_reg7;
+  lis2dw12_ctrl7_t ctrl_reg7;
   int32_t ret;
 
   ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL6, (uint8_t *) &ctrl6, 1);
-  ret += lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7,
-                          (uint8_t *) &ctrl_reg7, 1);
+  if (ret == 0)
+  {
+    ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &ctrl_reg7, 1);
+  }
 
   if (ret == 0)
   {
@@ -1299,15 +1306,15 @@ int32_t lis2dw12_filter_bandwidth_get(const stmdev_ctx_t *ctx,
   */
 int32_t lis2dw12_reference_mode_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
 
   if (ret == 0)
   {
     reg.hp_ref_mode = val;
-    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
   return ret;
@@ -1323,12 +1330,14 @@ int32_t lis2dw12_reference_mode_set(const stmdev_ctx_t *ctx, uint8_t val)
   */
 int32_t lis2dw12_reference_mode_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
-
-  if (ret != 0) { return ret; }
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   *val = reg.hp_ref_mode;
 
@@ -1736,12 +1745,16 @@ int32_t lis2dw12_pin_int1_route_set(const stmdev_ctx_t *ctx,
                                     lis2dw12_ctrl4_int1_pad_ctrl_t *val)
 {
   lis2dw12_ctrl5_int2_pad_ctrl_t ctrl5_int2_pad_ctrl;
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
   ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL5_INT2_PAD_CTRL,
-                          (uint8_t *)&ctrl5_int2_pad_ctrl, 1);
-  ret += lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+                          (uint8_t *) &ctrl5_int2_pad_ctrl, 1);
+
+  if (ret == 0)
+  {
+    ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
+  }
 
   if (ret == 0)
   {
@@ -1767,7 +1780,7 @@ int32_t lis2dw12_pin_int1_route_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
   return ret;
@@ -1803,13 +1816,17 @@ int32_t lis2dw12_pin_int1_route_get(const stmdev_ctx_t *ctx,
 int32_t lis2dw12_pin_int2_route_set(const stmdev_ctx_t *ctx,
                                     lis2dw12_ctrl5_int2_pad_ctrl_t *val)
 {
-  lis2dw12_ctrl4_int1_pad_ctrl_t ctrl4_int1_pad_ctrl;
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t ctrl_reg7;
+  lis2dw12_ctrl4_int1_pad_ctrl_t  ctrl4_int1_pad;
   int32_t ret;
 
   ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL4_INT1_PAD_CTRL,
-                          (uint8_t *) &ctrl4_int1_pad_ctrl, 1);
-  ret += lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+                          (uint8_t *)&ctrl4_int1_pad, 1);
+
+  if (ret == 0)
+  {
+    ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &ctrl_reg7, 1);
+  }
 
   if (ret == 0)
   {
@@ -1820,12 +1837,12 @@ int32_t lis2dw12_pin_int2_route_set(const stmdev_ctx_t *ctx,
          ctrl4_int1_pad_ctrl.int1_6d |
          val->int2_sleep_state | val->int2_sleep_chg) != PROPERTY_DISABLE)
     {
-      reg.interrupts_enable = PROPERTY_ENABLE;
+      ctrl_reg7.interrupts_enable = PROPERTY_ENABLE;
     }
 
     else
     {
-      reg.interrupts_enable = PROPERTY_DISABLE;
+      ctrl_reg7.interrupts_enable = PROPERTY_DISABLE;
     }
 
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL5_INT2_PAD_CTRL,
@@ -1834,7 +1851,7 @@ int32_t lis2dw12_pin_int2_route_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &ctrl_reg7, 1);
   }
 
   return ret;
@@ -1868,15 +1885,15 @@ int32_t lis2dw12_pin_int2_route_get(const stmdev_ctx_t *ctx,
   */
 int32_t lis2dw12_all_on_int1_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
 
   if (ret == 0)
   {
     reg.int2_on_int1 = val;
-    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
   return ret;
@@ -1892,12 +1909,14 @@ int32_t lis2dw12_all_on_int1_set(const stmdev_ctx_t *ctx, uint8_t val)
   */
 int32_t lis2dw12_all_on_int1_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
-
-  if (ret != 0) { return ret; }
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   *val = reg.int2_on_int1;
 
@@ -2020,15 +2039,15 @@ int32_t lis2dw12_wkup_dur_get(const stmdev_ctx_t *ctx, uint8_t *val)
 int32_t lis2dw12_wkup_feed_data_set(const stmdev_ctx_t *ctx,
                                     lis2dw12_usr_off_on_wu_t val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
 
   if (ret == 0)
   {
     reg.usr_off_on_wu = (uint8_t) val;
-    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
   return ret;
@@ -2045,12 +2064,14 @@ int32_t lis2dw12_wkup_feed_data_set(const stmdev_ctx_t *ctx,
 int32_t lis2dw12_wkup_feed_data_get(const stmdev_ctx_t *ctx,
                                     lis2dw12_usr_off_on_wu_t *val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
-
-  if (ret != 0) { return ret; }
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   switch (reg.usr_off_on_wu)
   {
@@ -2966,15 +2987,15 @@ int32_t lis2dw12_6d_src_get(const stmdev_ctx_t *ctx,
 int32_t lis2dw12_6d_feed_data_set(const stmdev_ctx_t *ctx,
                                   lis2dw12_lpass_on6d_t val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
 
   if (ret == 0)
   {
     reg.lpass_on6d = (uint8_t) val;
-    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
+    ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
   return ret;
@@ -2991,12 +3012,14 @@ int32_t lis2dw12_6d_feed_data_set(const stmdev_ctx_t *ctx,
 int32_t lis2dw12_6d_feed_data_get(const stmdev_ctx_t *ctx,
                                   lis2dw12_lpass_on6d_t *val)
 {
-  lis2dw12_ctrl_reg7_t reg;
+  lis2dw12_ctrl7_t reg;
   int32_t ret;
 
-  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL_REG7, (uint8_t *) &reg, 1);
-
-  if (ret != 0) { return ret; }
+  ret = lis2dw12_read_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   switch (reg.lpass_on6d)
   {
