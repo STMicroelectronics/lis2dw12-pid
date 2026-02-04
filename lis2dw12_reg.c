@@ -2166,8 +2166,8 @@ int32_t lis2dw12_act_mode_set(const stmdev_ctx_t *ctx,
   {
     wake_up_ths.sleep_on = (uint8_t) val & 0x01U;
     wake_up_dur.stationary = ((uint8_t)val & 0x02U) >> 1;
-    ret = lis2dw12_write_reg(ctx, LIS2DW12_WAKE_UP_THS,
-                             (uint8_t *) &wake_up_ths, 2);
+    uint8_t buf[2] = {*(uint8_t *) &wake_up_ths, *(uint8_t *) &wake_up_dur};
+    ret = lis2dw12_write_reg(ctx, LIS2DW12_WAKE_UP_THS, buf, 2);
   }
 
   return ret;
