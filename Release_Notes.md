@@ -30,31 +30,44 @@ This directory contains the LIS2DW12 component drivers.
 # Update history
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section1" aria-hidden="true">
-<label for="collapse-section1" aria-hidden="true">V1.0.0 / 18-June-2021</label>
-<div>
-
-## Main changes
-
-### First release
-
-- First official release [ref. DS v8.0]
-
-##
-</div>
-
-<input type="checkbox" id="collapse-section2" aria-hidden="true">
-<label for="collapse-section2" aria-hidden="true">V1.1.0 / 18-May-2023</label>
+<input type="checkbox" id="collapse-section6" checked aria-hidden="true">
+<label for="collapse-section6" aria-hidden="true">V2.2.0 / 07-Oct-2025</label>
 <div>
 
 ## Main changes
 
 ###
 
-- Fix wrong comment for two ff APIs
-- Add __weak directive to read/write registers routines
-- Extend stmdev_ctx_t structure with mdelay callback
-- repo name changed adding '-pid' extension.
+- Added checks after reads to avoid write random content on pointers
+- Adding CODE_OF_CONDUCT.md and SECURITY.md
+
+##
+
+</div>
+<input type="checkbox" id="collapse-section5" aria-hidden="true">
+<label for="collapse-section5" aria-hidden="true">V2.1.0 / 07-Jul-2025</label>
+<div>
+
+## Main changes
+
+###
+
+- Fix driver formatting options
+- Added pointer to private data in stmdev_ctx_t
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section4" aria-hidden="true">
+<label for="collapse-section4" aria-hidden="true">V2.0.1 / 20-Jun-2024</label>
+<div>
+
+## Main changes
+
+###
+
+- updated README.md file with tag reference and mdelay description
 
 ##
 
@@ -75,49 +88,36 @@ This directory contains the LIS2DW12 component drivers.
 
 </div>
 
-<input type="checkbox" id="collapse-section4" aria-hidden="true">
-<label for="collapse-section4" aria-hidden="true">V2.0.1 / 20-Jun-2024</label>
+<input type="checkbox" id="collapse-section2" aria-hidden="true">
+<label for="collapse-section2" aria-hidden="true">V1.1.0 / 18-May-2023</label>
 <div>
 
 ## Main changes
 
 ###
 
-- updated README.md file with tag reference and mdelay description
+- Fix wrong comment for two ff APIs
+- Add __weak directive to read/write registers routines
+- Extend stmdev_ctx_t structure with mdelay callback
+- repo name changed adding '-pid' extension.
 
 ##
 
 </div>
 
-<input type="checkbox" id="collapse-section5" aria-hidden="true">
-<label for="collapse-section5" aria-hidden="true">V2.1.0 / 07-Jul-2025</label>
+<input type="checkbox" id="collapse-section1" aria-hidden="true">
+<label for="collapse-section1" aria-hidden="true">V1.0.0 / 18-June-2021</label>
 <div>
 
 ## Main changes
 
-###
+### First release
 
-- Fix driver formatting options
-- Added pointer to private data in stmdev_ctx_t
-
-##
-
-</div>
-
-<input type="checkbox" id="collapse-section6" checked aria-hidden="true">
-<label for="collapse-section6" aria-hidden="true">V2.2.0 / 07-Oct-2025</label>
-<div>
-
-## Main changes
-
-###
-
-- Added checks after reads to avoid write random content on pointers
-- Adding CODE_OF_CONDUCT.md and SECURITY.md
+- First official release [ref. DS v8.0]
 
 ##
-
 </div>
+
 :::
 
 
