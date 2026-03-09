@@ -223,75 +223,75 @@ int32_t lis2dw12_power_mode_get(const stmdev_ctx_t *ctx,
     switch (((ctrl6.low_noise << 4) + (ctrl1.mode << 2) +
              ctrl1.lp_mode))
     {
-      case LIS2DW12_HIGH_PERFORMANCE:
+      case 0x04:
         *val = LIS2DW12_HIGH_PERFORMANCE;
         break;
 
-      case LIS2DW12_CONT_LOW_PWR_4:
+      case 0x03:
         *val = LIS2DW12_CONT_LOW_PWR_4;
         break;
 
-      case LIS2DW12_CONT_LOW_PWR_3:
+      case 0x02:
         *val = LIS2DW12_CONT_LOW_PWR_3;
         break;
 
-      case LIS2DW12_CONT_LOW_PWR_2:
+      case 0x01:
         *val = LIS2DW12_CONT_LOW_PWR_2;
         break;
 
-      case LIS2DW12_CONT_LOW_PWR_12bit:
+      case 0x00:
         *val = LIS2DW12_CONT_LOW_PWR_12bit;
         break;
 
-      case LIS2DW12_SINGLE_LOW_PWR_4:
+      case 0x0B:
         *val = LIS2DW12_SINGLE_LOW_PWR_4;
         break;
 
-      case LIS2DW12_SINGLE_LOW_PWR_3:
+      case 0x0A:
         *val = LIS2DW12_SINGLE_LOW_PWR_3;
         break;
 
-      case LIS2DW12_SINGLE_LOW_PWR_2:
+      case 0x09:
         *val = LIS2DW12_SINGLE_LOW_PWR_2;
         break;
 
-      case LIS2DW12_SINGLE_LOW_PWR_12bit:
+      case 0x08:
         *val = LIS2DW12_SINGLE_LOW_PWR_12bit;
         break;
 
-      case LIS2DW12_HIGH_PERFORMANCE_LOW_NOISE:
+      case 0x14:
         *val = LIS2DW12_HIGH_PERFORMANCE_LOW_NOISE;
         break;
 
-      case LIS2DW12_CONT_LOW_PWR_LOW_NOISE_4:
+      case 0x13:
         *val = LIS2DW12_CONT_LOW_PWR_LOW_NOISE_4;
         break;
 
-      case LIS2DW12_CONT_LOW_PWR_LOW_NOISE_3:
+      case 0x12:
         *val = LIS2DW12_CONT_LOW_PWR_LOW_NOISE_3;
         break;
 
-      case LIS2DW12_CONT_LOW_PWR_LOW_NOISE_2:
+      case 0x11:
         *val = LIS2DW12_CONT_LOW_PWR_LOW_NOISE_2;
         break;
 
-      case LIS2DW12_CONT_LOW_PWR_LOW_NOISE_12bit:
+      case 0x10:
         *val = LIS2DW12_CONT_LOW_PWR_LOW_NOISE_12bit;
         break;
 
-      case LIS2DW12_SINGLE_LOW_PWR_LOW_NOISE_4:
+      case 0x1B:
         *val = LIS2DW12_SINGLE_LOW_PWR_LOW_NOISE_4;
         break;
 
-      case LIS2DW12_SINGLE_LOW_PWR_LOW_NOISE_3:
+      case 0x1A:
         *val = LIS2DW12_SINGLE_LOW_PWR_LOW_NOISE_3;
         break;
 
-      case LIS2DW12_SINGLE_LOW_PWR_LOW_NOISE_2:
+      case 0x19:
         *val = LIS2DW12_SINGLE_LOW_PWR_LOW_NOISE_2;
         break;
 
-      case LIS2DW12_SINGLE_LOW_LOW_NOISE_PWR_12bit:
+      case 0x18:
         *val = LIS2DW12_SINGLE_LOW_LOW_NOISE_PWR_12bit;
         break;
 
@@ -364,51 +364,51 @@ int32_t lis2dw12_data_rate_get(const stmdev_ctx_t *ctx, lis2dw12_odr_t *val)
   {
     switch ((ctrl3.slp_mode << 4) + ctrl1.odr)
     {
-      case LIS2DW12_XL_ODR_OFF:
+      case 0x00:
         *val = LIS2DW12_XL_ODR_OFF;
         break;
 
-      case LIS2DW12_XL_ODR_1Hz6_LP_ONLY:
+      case 0x01:
         *val = LIS2DW12_XL_ODR_1Hz6_LP_ONLY;
         break;
 
-      case LIS2DW12_XL_ODR_12Hz5:
+      case 0x02:
         *val = LIS2DW12_XL_ODR_12Hz5;
         break;
 
-      case LIS2DW12_XL_ODR_25Hz:
+      case 0x03:
         *val = LIS2DW12_XL_ODR_25Hz;
         break;
 
-      case LIS2DW12_XL_ODR_50Hz:
+      case 0x04:
         *val = LIS2DW12_XL_ODR_50Hz;
         break;
 
-      case LIS2DW12_XL_ODR_100Hz:
+      case 0x05:
         *val = LIS2DW12_XL_ODR_100Hz;
         break;
 
-      case LIS2DW12_XL_ODR_200Hz:
+      case 0x06:
         *val = LIS2DW12_XL_ODR_200Hz;
         break;
 
-      case LIS2DW12_XL_ODR_400Hz:
+      case 0x07:
         *val = LIS2DW12_XL_ODR_400Hz;
         break;
 
-      case LIS2DW12_XL_ODR_800Hz:
+      case 0x08:
         *val = LIS2DW12_XL_ODR_800Hz;
         break;
 
-      case LIS2DW12_XL_ODR_1k6Hz:
+      case 0x09:
         *val = LIS2DW12_XL_ODR_1k6Hz;
         break;
 
-      case LIS2DW12_XL_SET_SW_TRIG:
+      case 0x12:
         *val = LIS2DW12_XL_SET_SW_TRIG;
         break;
 
-      case LIS2DW12_XL_SET_PIN_TRIG:
+      case 0x22:
         *val = LIS2DW12_XL_SET_PIN_TRIG;
         break;
 
@@ -509,19 +509,19 @@ int32_t lis2dw12_full_scale_get(const stmdev_ctx_t *ctx, lis2dw12_fs_t *val)
 
   switch (reg.fs)
   {
-    case LIS2DW12_2g:
+    case 0x00:
       *val = LIS2DW12_2g;
       break;
 
-    case LIS2DW12_4g:
+    case 0x01:
       *val = LIS2DW12_4g;
       break;
 
-    case LIS2DW12_8g:
+    case 0x02:
       *val = LIS2DW12_8g;
       break;
 
-    case LIS2DW12_16g:
+    case 0x03:
       *val = LIS2DW12_16g;
       break;
 
@@ -753,11 +753,11 @@ int32_t lis2dw12_offset_weight_get(const stmdev_ctx_t *ctx,
   {
     switch (reg.usr_off_w)
     {
-      case LIS2DW12_LSb_977ug:
+      case 0x00:
         *val = LIS2DW12_LSb_977ug;
         break;
 
-      case LIS2DW12_LSb_15mg6:
+      case 0x01:
         *val = LIS2DW12_LSb_15mg6;
         break;
 
@@ -1054,15 +1054,15 @@ int32_t lis2dw12_self_test_get(const stmdev_ctx_t *ctx, lis2dw12_st_t *val)
 
   switch (reg.st)
   {
-    case LIS2DW12_XL_ST_DISABLE:
+    case 0x00:
       *val = LIS2DW12_XL_ST_DISABLE;
       break;
 
-    case LIS2DW12_XL_ST_POSITIVE:
+    case 0x01:
       *val = LIS2DW12_XL_ST_POSITIVE;
       break;
 
-    case LIS2DW12_XL_ST_NEGATIVE:
+    case 0x02:
       *val = LIS2DW12_XL_ST_NEGATIVE;
       break;
 
@@ -1121,11 +1121,11 @@ int32_t lis2dw12_data_ready_mode_get(const stmdev_ctx_t *ctx,
 
   switch (reg.drdy_pulsed)
   {
-    case LIS2DW12_DRDY_LATCHED:
+    case 0x00:
       *val = LIS2DW12_DRDY_LATCHED;
       break;
 
-    case LIS2DW12_DRDY_PULSED:
+    case 0x01:
       *val = LIS2DW12_DRDY_PULSED;
       break;
 
@@ -1212,15 +1212,15 @@ int32_t lis2dw12_filter_path_get(const stmdev_ctx_t *ctx,
   {
     switch ((ctrl6.fds << 4) + ctrl_reg7.usr_off_on_out)
     {
-      case LIS2DW12_LPF_ON_OUT:
+      case 0x00:
         *val = LIS2DW12_LPF_ON_OUT;
         break;
 
-      case LIS2DW12_USER_OFFSET_ON_OUT:
+      case 0x01:
         *val = LIS2DW12_USER_OFFSET_ON_OUT;
         break;
 
-      case LIS2DW12_HIGH_PASS_ON_OUT:
+      case 0x10:
         *val = LIS2DW12_HIGH_PASS_ON_OUT;
         break;
 
@@ -1252,6 +1252,7 @@ int32_t lis2dw12_filter_bandwidth_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
+
     reg.bw_filt = (uint8_t) val;
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL6, (uint8_t *) &reg, 1);
   }
@@ -1412,11 +1413,11 @@ int32_t lis2dw12_spi_mode_get(const stmdev_ctx_t *ctx, lis2dw12_sim_t *val)
 
   switch (reg.sim)
   {
-    case LIS2DW12_SPI_4_WIRE:
+    case 0x00:
       *val = LIS2DW12_SPI_4_WIRE;
       break;
 
-    case LIS2DW12_SPI_3_WIRE:
+    case 0x01:
       *val = LIS2DW12_SPI_3_WIRE;
       break;
 
@@ -1476,11 +1477,11 @@ int32_t lis2dw12_i2c_interface_get(const stmdev_ctx_t *ctx,
 
   switch (reg.i2c_disable)
   {
-    case LIS2DW12_I2C_ENABLE:
+    case 0x00:
       *val = LIS2DW12_I2C_ENABLE;
       break;
 
-    case LIS2DW12_I2C_DISABLE:
+    case 0x01:
       *val = LIS2DW12_I2C_DISABLE;
       break;
 
@@ -1539,11 +1540,11 @@ int32_t lis2dw12_cs_mode_get(const stmdev_ctx_t *ctx,
 
   switch (reg.cs_pu_disc)
   {
-    case LIS2DW12_PULL_UP_CONNECT:
+    case 0x00:
       *val = LIS2DW12_PULL_UP_CONNECT;
       break;
 
-    case LIS2DW12_PULL_UP_DISCONNECT:
+    case 0x01:
       *val = LIS2DW12_PULL_UP_DISCONNECT;
       break;
 
@@ -1614,11 +1615,11 @@ int32_t lis2dw12_pin_polarity_get(const stmdev_ctx_t *ctx,
 
   switch (reg.h_lactive)
   {
-    case LIS2DW12_ACTIVE_HIGH:
+    case 0x00:
       *val = LIS2DW12_ACTIVE_HIGH;
       break;
 
-    case LIS2DW12_ACTIVE_LOW:
+    case 0x01:
       *val = LIS2DW12_ACTIVE_LOW;
       break;
 
@@ -1677,11 +1678,11 @@ int32_t lis2dw12_int_notification_get(const stmdev_ctx_t *ctx,
 
   switch (reg.lir)
   {
-    case LIS2DW12_INT_PULSED:
+    case 0x00:
       *val = LIS2DW12_INT_PULSED;
       break;
 
-    case LIS2DW12_INT_LATCHED:
+    case 0x01:
       *val = LIS2DW12_INT_LATCHED;
       break;
 
@@ -1739,11 +1740,11 @@ int32_t lis2dw12_pin_mode_get(const stmdev_ctx_t *ctx,
 
   switch (reg.pp_od)
   {
-    case LIS2DW12_PUSH_PULL:
+    case 0x00:
       *val = LIS2DW12_PUSH_PULL;
       break;
 
-    case LIS2DW12_OPEN_DRAIN:
+    case 0x01:
       *val = LIS2DW12_OPEN_DRAIN;
       break;
 
@@ -2105,11 +2106,11 @@ int32_t lis2dw12_wkup_feed_data_get(const stmdev_ctx_t *ctx,
 
   switch (reg.usr_off_on_wu)
   {
-    case LIS2DW12_HP_FEED:
+    case 0x00:
       *val = LIS2DW12_HP_FEED;
       break;
 
-    case LIS2DW12_USER_OFFSET_FEED:
+    case 0x01:
       *val = LIS2DW12_USER_OFFSET_FEED;
       break;
 
@@ -2198,15 +2199,15 @@ int32_t lis2dw12_act_mode_get(const stmdev_ctx_t *ctx,
   {
     switch ((wake_up_dur.stationary << 1) + wake_up_ths.sleep_on)
     {
-      case LIS2DW12_NO_DETECTION:
+      case 0x00:
         *val = LIS2DW12_NO_DETECTION;
         break;
 
-      case LIS2DW12_DETECT_ACT_INACT:
+      case 0x01:
         *val = LIS2DW12_DETECT_ACT_INACT;
         break;
 
-      case LIS2DW12_DETECT_STAT_MOTION:
+      case 0x03:
         *val = LIS2DW12_DETECT_STAT_MOTION;
         break;
 
@@ -2417,28 +2418,36 @@ int32_t lis2dw12_tap_axis_priority_get(const stmdev_ctx_t *ctx,
 
   switch (reg.tap_prior)
   {
-    case LIS2DW12_XYZ:
+    case 0x00:
       *val = LIS2DW12_XYZ;
       break;
 
-    case LIS2DW12_YXZ:
+    case 0x01:
       *val = LIS2DW12_YXZ;
       break;
 
-    case LIS2DW12_XZY:
+    case 0x02:
       *val = LIS2DW12_XZY;
       break;
 
-    case LIS2DW12_ZYX:
+    case 0x03:
       *val = LIS2DW12_ZYX;
       break;
 
-    case LIS2DW12_YZX:
+    case 0x04:
+      *val = LIS2DW12_XYZ;
+      break;
+
+    case 0x05:
       *val = LIS2DW12_YZX;
       break;
 
-    case LIS2DW12_ZXY:
+    case 0x06:
       *val = LIS2DW12_ZXY;
+      break;
+
+    case 0x07:
+      *val = LIS2DW12_ZYX;
       break;
 
     default:
@@ -2864,11 +2873,11 @@ int32_t lis2dw12_tap_mode_get(const stmdev_ctx_t *ctx,
 
   switch (reg.single_double_tap)
   {
-    case LIS2DW12_ONLY_SINGLE:
+    case 0x00:
       *val = LIS2DW12_ONLY_SINGLE;
       break;
 
-    case LIS2DW12_BOTH_SINGLE_DOUBLE:
+    case 0x01:
       *val = LIS2DW12_BOTH_SINGLE_DOUBLE;
       break;
 
@@ -3072,11 +3081,11 @@ int32_t lis2dw12_6d_feed_data_get(const stmdev_ctx_t *ctx,
 
   switch (reg.lpass_on6d)
   {
-    case LIS2DW12_ODR_DIV_2_FEED:
+    case 0x00:
       *val = LIS2DW12_ODR_DIV_2_FEED;
       break;
 
-    case LIS2DW12_LPF2_FEED:
+    case 0x01:
       *val = LIS2DW12_LPF2_FEED;
       break;
 
@@ -3219,35 +3228,35 @@ int32_t lis2dw12_ff_threshold_get(const stmdev_ctx_t *ctx,
 
   switch (reg.ff_ths)
   {
-    case LIS2DW12_FF_TSH_5LSb_FS2g:
+    case 0x00:
       *val = LIS2DW12_FF_TSH_5LSb_FS2g;
       break;
 
-    case LIS2DW12_FF_TSH_7LSb_FS2g:
+    case 0x01:
       *val = LIS2DW12_FF_TSH_7LSb_FS2g;
       break;
 
-    case LIS2DW12_FF_TSH_8LSb_FS2g:
+    case 0x02:
       *val = LIS2DW12_FF_TSH_8LSb_FS2g;
       break;
 
-    case LIS2DW12_FF_TSH_10LSb_FS2g:
+    case 0x03:
       *val = LIS2DW12_FF_TSH_10LSb_FS2g;
       break;
 
-    case LIS2DW12_FF_TSH_11LSb_FS2g:
+    case 0x04:
       *val = LIS2DW12_FF_TSH_11LSb_FS2g;
       break;
 
-    case LIS2DW12_FF_TSH_13LSb_FS2g:
+    case 0x05:
       *val = LIS2DW12_FF_TSH_13LSb_FS2g;
       break;
 
-    case LIS2DW12_FF_TSH_15LSb_FS2g:
+    case 0x06:
       *val = LIS2DW12_FF_TSH_15LSb_FS2g;
       break;
 
-    case LIS2DW12_FF_TSH_16LSb_FS2g:
+    case 0x07:
       *val = LIS2DW12_FF_TSH_16LSb_FS2g;
       break;
 
@@ -3366,23 +3375,23 @@ int32_t lis2dw12_fifo_mode_get(const stmdev_ctx_t *ctx,
 
   switch (reg.fmode)
   {
-    case LIS2DW12_BYPASS_MODE:
+    case 0x00:
       *val = LIS2DW12_BYPASS_MODE;
       break;
 
-    case LIS2DW12_FIFO_MODE:
+    case 0x01:
       *val = LIS2DW12_FIFO_MODE;
       break;
 
-    case LIS2DW12_STREAM_TO_FIFO_MODE:
+    case 0x03:
       *val = LIS2DW12_STREAM_TO_FIFO_MODE;
       break;
 
-    case LIS2DW12_BYPASS_TO_STREAM_MODE:
+    case 0x04:
       *val = LIS2DW12_BYPASS_TO_STREAM_MODE;
       break;
 
-    case LIS2DW12_STREAM_MODE:
+    case 0x06:
       *val = LIS2DW12_STREAM_MODE;
       break;
 
