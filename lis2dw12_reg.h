@@ -108,8 +108,17 @@ typedef struct
   *
   */
 
-typedef int32_t (*stmdev_write_ptr)(void *, uint8_t, const uint8_t *, uint16_t);
-typedef int32_t (*stmdev_read_ptr)(void *, uint8_t, uint8_t *, uint16_t);
+typedef int32_t (*stmdev_write_ptr)(
+  void *handle,
+  uint8_t reg,
+  const uint8_t *buf,
+  uint16_t len);
+
+typedef int32_t (*stmdev_read_ptr)(
+  void *handle,
+  uint8_t reg,
+  uint8_t *buf,
+  uint16_t len);
 typedef void (*stmdev_mdelay_ptr)(uint32_t millisec);
 
 typedef struct
