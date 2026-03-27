@@ -322,7 +322,7 @@ int32_t lis2dw12_data_rate_set(const stmdev_ctx_t *ctx, lis2dw12_odr_t val)
 
   if (ret == 0)
   {
-    ctrl1.odr = (uint8_t) val;
+    ctrl1.odr = (uint8_t)(val & 0x0F);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL1, (uint8_t *) &ctrl1, 1);
   }
 
@@ -438,7 +438,7 @@ int32_t lis2dw12_block_data_update_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.bdu = val;
+    reg.bdu = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL2, (uint8_t *) &reg, 1);
   }
 
@@ -485,7 +485,7 @@ int32_t lis2dw12_full_scale_set(const stmdev_ctx_t *ctx, lis2dw12_fs_t val)
 
   if (ret == 0)
   {
-    reg.fs = (uint8_t) val;
+    reg.fs = (uint8_t)(val & 0x03);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL6, (uint8_t *) &reg, 1);
   }
 
@@ -725,7 +725,7 @@ int32_t lis2dw12_offset_weight_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.usr_off_w = (uint8_t) val;
+    reg.usr_off_w = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
@@ -799,8 +799,7 @@ int32_t lis2dw12_temperature_raw_get(const stmdev_ctx_t *ctx, int16_t *val)
   ret = lis2dw12_read_reg(ctx, LIS2DW12_OUT_T_L, buff, 2);
   if (ret == 0)
   {
-    *val = (int16_t)buff[1];
-    *val = (*val * 256) + (int16_t)buff[0];
+    *val = (int16_t)(((uint16_t)buff[1] << 8) + buff[0]) ;
   }
 
   return ret;
@@ -826,12 +825,9 @@ int32_t lis2dw12_acceleration_raw_get(const stmdev_ctx_t *ctx, int16_t *val)
     return ret;
   }
 
-  val[0] = (int16_t)buff[1];
-  val[0] = (val[0] * 256) + (int16_t)buff[0];
-  val[1] = (int16_t)buff[3];
-  val[1] = (val[1] * 256) + (int16_t)buff[2];
-  val[2] = (int16_t)buff[5];
-  val[2] = (val[2] * 256) + (int16_t)buff[4];
+  val[0] = (int16_t)(((uint16_t)buff[1] << 8) + buff[0]) ;
+  val[1] = (int16_t)(((uint16_t)buff[3] << 8) + buff[2]) ;
+  val[2] = (int16_t)(((uint16_t)buff[5] << 8) + buff[4]) ;
 
   return ret;
 }
@@ -883,7 +879,7 @@ int32_t lis2dw12_auto_increment_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.if_add_inc = val;
+    reg.if_add_inc = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL2, (uint8_t *) &reg, 1);
   }
 
@@ -1026,7 +1022,7 @@ int32_t lis2dw12_self_test_set(const stmdev_ctx_t *ctx, lis2dw12_st_t val)
 
   if (ret == 0)
   {
-    reg.st = (uint8_t) val;
+    reg.st = (uint8_t)(val & 0x03);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL3, (uint8_t *) &reg, 1);
   }
 
@@ -1092,7 +1088,7 @@ int32_t lis2dw12_data_ready_mode_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.drdy_pulsed = (uint8_t) val;
+    reg.drdy_pulsed = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
@@ -1253,7 +1249,7 @@ int32_t lis2dw12_filter_bandwidth_set(const stmdev_ctx_t *ctx,
   if (ret == 0)
   {
 
-    reg.bw_filt = (uint8_t) val;
+    reg.bw_filt = (uint8_t)(val & 0x03);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL6, (uint8_t *) &reg, 1);
   }
 
@@ -1324,7 +1320,7 @@ int32_t lis2dw12_reference_mode_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.hp_ref_mode = val;
+    reg.hp_ref_mode = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
@@ -1385,7 +1381,7 @@ int32_t lis2dw12_spi_mode_set(const stmdev_ctx_t *ctx, lis2dw12_sim_t val)
 
   if (ret == 0)
   {
-    reg.sim = (uint8_t) val;
+    reg.sim = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL2, (uint8_t *) &reg, 1);
   }
 
@@ -1448,7 +1444,7 @@ int32_t lis2dw12_i2c_interface_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.i2c_disable = (uint8_t) val;
+    reg.i2c_disable = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL2, (uint8_t *) &reg, 1);
   }
 
@@ -1511,7 +1507,7 @@ int32_t lis2dw12_cs_mode_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.cs_pu_disc = (uint8_t) val;
+    reg.cs_pu_disc = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL2, (uint8_t *) &reg, 1);
   }
 
@@ -1586,7 +1582,7 @@ int32_t lis2dw12_pin_polarity_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.h_lactive = (uint8_t) val;
+    reg.h_lactive = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL3, (uint8_t *) &reg, 1);
   }
 
@@ -1649,7 +1645,7 @@ int32_t lis2dw12_int_notification_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.lir = (uint8_t) val;
+    reg.lir = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL3, (uint8_t *) &reg, 1);
   }
 
@@ -1711,7 +1707,7 @@ int32_t lis2dw12_pin_mode_set(const stmdev_ctx_t *ctx, lis2dw12_pp_od_t val)
 
   if (ret == 0)
   {
-    reg.pp_od = (uint8_t) val;
+    reg.pp_od = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL3, (uint8_t *) &reg, 1);
   }
 
@@ -1919,7 +1915,7 @@ int32_t lis2dw12_all_on_int1_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.int2_on_int1 = val;
+    reg.int2_on_int1 = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
@@ -1980,7 +1976,7 @@ int32_t lis2dw12_wkup_threshold_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.wk_ths = val;
+    reg.wk_ths = (uint8_t)(val & 0x3F);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_WAKE_UP_THS, (uint8_t *) &reg, 1);
   }
 
@@ -2028,7 +2024,7 @@ int32_t lis2dw12_wkup_dur_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.wake_dur = val;
+    reg.wake_dur = (uint8_t)(val & 0x03);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_WAKE_UP_DUR, (uint8_t *) &reg, 1);
   }
 
@@ -2077,7 +2073,7 @@ int32_t lis2dw12_wkup_feed_data_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.usr_off_on_wu = (uint8_t) val;
+    reg.usr_off_on_wu = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
@@ -2237,7 +2233,7 @@ int32_t lis2dw12_act_sleep_dur_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.sleep_dur = val;
+    reg.sleep_dur = (uint8_t)(val & 0x0F);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_WAKE_UP_DUR, (uint8_t *) &reg, 1);
   }
 
@@ -2296,7 +2292,7 @@ int32_t lis2dw12_tap_threshold_x_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.tap_thsx = val;
+    reg.tap_thsx = (uint8_t)(val & 0x1F);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_TAP_THS_X, (uint8_t *) &reg, 1);
   }
 
@@ -2342,7 +2338,7 @@ int32_t lis2dw12_tap_threshold_y_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.tap_thsy = val;
+    reg.tap_thsy = (uint8_t)(val & 0x1F);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_TAP_THS_Y, (uint8_t *) &reg, 1);
   }
 
@@ -2389,7 +2385,7 @@ int32_t lis2dw12_tap_axis_priority_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.tap_prior = (uint8_t) val;
+    reg.tap_prior = (uint8_t)(val & 0x07);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_TAP_THS_Y, (uint8_t *) &reg, 1);
   }
 
@@ -2475,7 +2471,7 @@ int32_t lis2dw12_tap_threshold_z_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.tap_thsz = val;
+    reg.tap_thsz = (uint8_t)(val & 0x1F);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_TAP_THS_Z, (uint8_t *) &reg, 1);
   }
 
@@ -2524,7 +2520,7 @@ int32_t lis2dw12_tap_detection_on_z_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.tap_z_en = val;
+    reg.tap_z_en = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_TAP_THS_Z, (uint8_t *) &reg, 1);
   }
 
@@ -2574,7 +2570,7 @@ int32_t lis2dw12_tap_detection_on_y_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.tap_y_en = val;
+    reg.tap_y_en = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_TAP_THS_Z, (uint8_t *) &reg, 1);
   }
 
@@ -2624,7 +2620,7 @@ int32_t lis2dw12_tap_detection_on_x_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.tap_x_en = val;
+    reg.tap_x_en = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_TAP_THS_Z, (uint8_t *) &reg, 1);
   }
 
@@ -2677,7 +2673,7 @@ int32_t lis2dw12_tap_shock_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.shock = val;
+    reg.shock = (uint8_t)(val & 0x03);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_INT_DUR, (uint8_t *) &reg, 1);
   }
 
@@ -2733,7 +2729,7 @@ int32_t lis2dw12_tap_quiet_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.quiet = val;
+    reg.quiet = (uint8_t)(val & 0x03);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_INT_DUR, (uint8_t *) &reg, 1);
   }
 
@@ -2790,7 +2786,7 @@ int32_t lis2dw12_tap_dur_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.latency = val;
+    reg.latency = (uint8_t)(val & 0x0F);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_INT_DUR, (uint8_t *) &reg, 1);
   }
 
@@ -2844,7 +2840,7 @@ int32_t lis2dw12_tap_mode_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.single_double_tap = (uint8_t) val;
+    reg.single_double_tap = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_WAKE_UP_THS, (uint8_t *) &reg, 1);
   }
 
@@ -2937,7 +2933,7 @@ int32_t lis2dw12_6d_threshold_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg._6d_ths = val;
+    reg._6d_ths = (uint8_t)(val & 0x02);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_TAP_THS_X, (uint8_t *) &reg, 1);
   }
 
@@ -2986,7 +2982,7 @@ int32_t lis2dw12_4d_mode_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg._4d_en = val;
+    reg._4d_en = (uint8_t)(val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_TAP_THS_X, (uint8_t *) &reg, 1);
   }
 
@@ -3052,7 +3048,7 @@ int32_t lis2dw12_6d_feed_data_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.lpass_on6d = (uint8_t) val;
+    reg.lpass_on6d = (uint8_t)((uint8_t)val & 0x01);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_CTRL7, (uint8_t *) &reg, 1);
   }
 
@@ -3175,7 +3171,7 @@ int32_t lis2dw12_ff_dur_get(const stmdev_ctx_t *ctx, uint8_t *val)
   }
   if (ret == 0)
   {
-    *val = (wake_up_dur.ff_dur << 5) + free_fall.ff_dur;
+    *val = (uint8_t)(wake_up_dur.ff_dur << 5) + free_fall.ff_dur;
   }
 
   return ret;
@@ -3199,7 +3195,7 @@ int32_t lis2dw12_ff_threshold_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.ff_ths = (uint8_t) val;
+    reg.ff_ths = (uint8_t)((uint8_t)val & 0x07);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_FREE_FALL, (uint8_t *) &reg, 1);
   }
 
@@ -3297,7 +3293,7 @@ int32_t lis2dw12_fifo_watermark_set(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    reg.fth = val;
+    reg.fth = (uint8_t)((uint8_t)val & 0x1F);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_FIFO_CTRL, (uint8_t *) &reg, 1);
   }
 
@@ -3346,7 +3342,7 @@ int32_t lis2dw12_fifo_mode_set(const stmdev_ctx_t *ctx,
 
   if (ret == 0)
   {
-    reg.fmode = (uint8_t) val;
+    reg.fmode = (uint8_t)((uint8_t)val & 0x07);
     ret = lis2dw12_write_reg(ctx, LIS2DW12_FIFO_CTRL, (uint8_t *) &reg, 1);
   }
 
