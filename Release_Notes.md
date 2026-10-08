@@ -31,7 +31,22 @@ This directory contains the LIS2DW12 component drivers.
 
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section8" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section9" checked aria-hidden="true">
+<label for="collapse-section9" aria-hidden="true">V2.3.2 / 08-Oct-2026</label>
+<div>
+
+## Main changes
+
+- Fix data conversion routine
+- Add sign specification to bitmask
+- Fix compiler warnings
+- Fix some MISRA issues
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section8" aria-hidden="true">
 <label for="collapse-section8" aria-hidden="true">V2.3.1 / 18-Mar-2026</label>
 <div>
 
